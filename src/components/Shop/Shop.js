@@ -30,6 +30,7 @@ const Shop = () => {
                     {
                         product.map(pd => <Product 
                             handleAddProduct={handleAddProduct} 
+                            showAddtoCartBtn={true}
                             product={pd}>
 
                             </Product>)

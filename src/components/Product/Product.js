@@ -18,7 +18,7 @@ const Product = (props) => {
                 <h6>${price}</h6>
                 <h6>only {stock} left in stock - order soon</h6>
 
-                <button className="buy-button" onClick={() => props.handleAddProduct(props.product)}><FontAwesomeIcon icon={faShoppingCart}/>Buy Now</button>
+                {props.showAddtoCartBtn ===true && <button className="buy-button" onClick={() => props.handleAddProduct(props.product)}><FontAwesomeIcon icon={faShoppingCart}/>Buy Now</button>}
             </div>
         </div>
     );
