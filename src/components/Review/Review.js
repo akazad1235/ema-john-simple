@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { getDatabaseCart, removeFromDatabaseCart } from '../../utilities/databaseManager';
+import { getDatabaseCart, removeFromDatabaseCart, processOrder } from '../../utilities/databaseManager';
 import fakeData from '../../fakeData';
 import ReviewItem from '../ReviewItem/ReviewItem';
 import Cart from '../Cart/Cart';
+import happyImage from '../../images/giphy.gif';
 
 const Review = () => {
     const [cart, setCart] = useState([]);
+    const [orderPlace, setOrderPlace] = useState(false);
+
+    const handlePlaceHolder = () => {
+        setCart([]);
+        setOrderPlace(true)
+        processOrder();
+    } 
 
     const removeProduct = (productKey) => {
         console.log('Remove product', productKey);
@@ -25,7 +33,11 @@ const Review = () => {
         });
             
        setCart(cartProducts);
-    }, [] )
+    }, [] );
+    let thankyou;
+    if (orderPlace) {
+        thankyou =  <img src={happyImage}/>
+    }
     return (
         <div style={{display:'flex'}}>
                 <div> {
@@ -36,12 +48,19 @@ const Review = () => {
                              >   
 
                          </ReviewItem>)
-                }</div>
+                }
+                {
+                    thankyou
+                }
+               
+                </div>
                 <div>
-                    <Cart cart={cart}></Cart>
+                    <Cart cart={cart}>
+                        <button onClick={handlePlaceHolder} className='buy-button'>Place Order</button>
+                    </Cart>
                 </div>
         </div>
-    );
+    )
 };
 
 export default Review;
